@@ -2,7 +2,7 @@ import { authMiddleware } from "@clerk/nextjs";
  
 export default authMiddleware({
   // clerk 홈페이지에서 내 webhooks탭에서 내 Endpoint URL에 설정한 값
-  publicRoutes: ['/api/webhooks/clerk'],
+  publicRoutes: ['/api/webhooks/clerk']
 });
  
 export const config = {
