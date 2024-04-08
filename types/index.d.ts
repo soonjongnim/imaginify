@@ -78,6 +78,12 @@ declare type CreateUserParams = {
     amount: number;
     buyerId: string;
   };
+
+  declare type OrderTransactionParams = {
+    paymentKey: string;
+    orderId: string;
+    amount: number;
+  };
   
   declare type CreateTransactionParams = {
     stripeId: string;
@@ -85,6 +91,19 @@ declare type CreateUserParams = {
     credits: number;
     plan: string;
     buyerId: string;
+    createdAt: Date;
+  };
+
+  declare type CreateOrderTransactionParams = {
+    paymentKey: string;
+    orderId: string;
+    orderName: string;
+    amount: number;
+    status: string;
+    credits: number;
+    method: string;
+    buyerId: string;
+    requestedAt: string;
     createdAt: Date;
   };
   
