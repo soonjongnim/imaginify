@@ -1,6 +1,6 @@
 "use server";
 
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 
 const secretKey = `${process.env.TOSS_PAYMENTS_SECRET_KEY}`;
 

@@ -16,26 +16,28 @@ export default function Success() {
     const orderId = searchParams.get("orderId");
     const amount = searchParams.get("amount");
     
-    const handleConfirmPayment = () => {
-        const paymentInfo = {
-          paymentKey: paymentKey,
-          orderId: orderId,
-          amount: amount,
-        };
-      
-        confirmPayment(paymentInfo)
-          .then(async confirmResponse => {
+    const handleConfirmPayment = async () => {
+        try {
+            const paymentInfo = {
+                paymentKey: paymentKey,
+                orderId: orderId,
+                amount: amount,
+            };
+    
+            const confirmResponse = await confirmPayment(paymentInfo);
             console.log('confirmResponse:', confirmResponse);
+    
             if (confirmResponse.status === 'DONE') {
-              setIsConfirmed(true);
+                setIsConfirmed(true);
             }
-            // getDB 함수 호출
+    
             const data = await getDB("", orderId);
             console.log('Success orderId로 확인 완료: ', data);
+    
             if (data.length > 0) {
                 console.log('Success data.length 0보다 큼, 마지막 리스트 가져오기: ', data[data.length - 1]);
             }
-
+    
             const transaction = {
                 paymentKey: confirmResponse.paymentKey,
                 orderId: confirmResponse.orderId,
@@ -51,20 +53,19 @@ export default function Success() {
     
             const newTransaction = await createOderTransaction(transaction);
             console.log('newTransaction: ', newTransaction);
+    
             const result = await deleteDB(data[0].buyerId, "");
             console.log('Success 삭제완료: ', result);
-
-            return NextResponse.json({ message: "OK", transaction: newTransaction });
+    
+            // Redirect to the profile page
+            // const router = useRouter();
             // router.push("/profile");
-          })
-          .catch(error => {
+        } catch (error) {
             console.error('Error confirming payment:', error);
-            console.error('error code:', error.code, ', error message:', error.message);
-          })
-          .finally(()=>{
-              console.log('완료!!!!');
-          });
-      };
+        } finally {
+            console.log('완료!!!!');
+        }
+    };
 
   return (
     <div className="wrapper w-100">
