@@ -1,6 +1,6 @@
 "use client";
 
-import { confirmPayment } from '@/app/api/tossPayments/route';
+import { confirmPayment } from '@/lib/actions/tossPayments.actions';
 import { createOderTransaction } from '@/lib/actions/transaction.actions';
 import "@/public/assets/css/payments_style.css"
 import { useSearchParams } from 'next/navigation';
