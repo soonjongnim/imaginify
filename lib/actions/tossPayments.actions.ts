@@ -2,7 +2,7 @@
 
 // import fetch from 'node-fetch';
 
-const secretKey = `${process.env.TOSS_PAYMENTS_SECRET_KEY}`;
+const secretKey = `${process.env.NEXT_PUBLIC_TOSS_SECRET_KEY}`;
 
 async function confirmPayment(paymentInfo: { paymentKey?: string | null; orderId?: string | null; amount?: string | null } = {}) {
     const { paymentKey, orderId, amount } = paymentInfo;
